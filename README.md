@@ -61,7 +61,7 @@ where the fields W and V specify the endpoints of the edge while the lower-case 
 
 _Example Solution:_
 
-Claw Found `(1, 3, 4, 5)`: In Row `1` and Columns `3` & `4` & `5`
+Claw Found `(1, 3, 4, 5)`: In Column `1` and Rows `3` & `4` & `5`
 
 # Claw Detection Algorithm Overview
 
@@ -139,7 +139,7 @@ This claw detection algorithm, built on the `aegypti` package, has significant i
 1. **Leveraging Aegypti’s Innovation**:
 
    - The `aegypti` algorithm’s claimed $O(n + m)$ triangle detection (potentially challenging the sparse triangle hypothesis, $O(m^{4/3})$) enables efficient claw finding per node.
-   - Its availability via `pip install aegypti` (as of May 28, 2025, 04:54 PM CDT) makes it accessible for practical use.
+   - Its availability via `pip install aegypti` makes it accessible for practical use.
 
 2. **Practical Applications**:
 
