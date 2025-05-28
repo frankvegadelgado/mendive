@@ -2,7 +2,7 @@
 
 ![Honoring the Memory of Rafael Maria de Mendive (a notable Cuban educator and poet)](docs/mendive.jpg)
 
-This work builds upon [Fast Claw Detection in Sparse Graphs](https://dev.to/frank_vega_987689489099bf/claw-finding-algorithm-using-aegypti-2p0k).
+This work builds upon [Mendive: Fast Claw Detection in Sparse Graphs](https://dev.to/frank_vega_987689489099bf/claw-finding-algorithm-using-aegypti-2p0k).
 
 ---
 
