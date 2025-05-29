@@ -22,7 +22,7 @@ def main():
     helper.add_argument('-c', '--count', action='store_true', help='count the total amount of claws')
     helper.add_argument('-v', '--verbose', action='store_true', help='anable verbose output')
     helper.add_argument('-l', '--log', action='store_true', help='enable file logging')
-    helper.add_argument('--version', action='version', version='%(prog)s 0.0.3')
+    helper.add_argument('--version', action='version', version='%(prog)s 0.0.4')
     
     # Initialize the parameters
     args = helper.parse_args()
@@ -42,13 +42,13 @@ def main():
     filename = utils.get_file_name(filepath)
     logger.info(f"Parsing the Input File done in: {(time.time() - started) * 1000.0} milliseconds")
     
-    # A solution with a time complexity of O(n + m)
-    logger.info("A solution with a time complexity of O(n + m) started")
+    # A solution with a time complexity of O(m*maximum_degree)
+    logger.info("A solution with a time complexity of O(m*maximum_degree) started")
     started = time.time()
     
     result = algorithm.find_claw_coordinates(graph, not (count_claws or all_claws))
 
-    logger.info(f"A solution with a time complexity of O(n + m) done in: {(time.time() - started) * 1000.0} milliseconds")
+    logger.info(f"A solution with a time complexity of O(m*maximum_degree) done in: {(time.time() - started) * 1000.0} milliseconds")
 
     # Output the smart solution
     answer = utils.string_complex_format(result, count_claws)
@@ -58,17 +58,17 @@ def main():
     # A Solution with brute force
     if brute_force:
         if count_claws or all_claws:
-            logger.info("A solution with a time complexity of at least O(n^(3)) started")
+            logger.info("A solution with a time complexity of at least O(n^(4)) started")
         else:    
-            logger.info("A solution with a time complexity of at least O(m^(1.407)) started")
+            logger.info("A solution with a time complexity of at least O(n^(3.372)) started")
         started = time.time()
         
         result = algorithm.find_claw_coordinates_brute_force(sparse_matrix) if count_claws or all_claws else algorithm.is_claw_free_brute_force(sparse_matrix)
 
         if count_claws or all_claws:
-            logger.info(f"A solution with a time complexity of at least O(n^(3)) done in: {(time.time() - started) * 1000.0} milliseconds")
+            logger.info(f"A solution with a time complexity of at least O(n^(4)) done in: {(time.time() - started) * 1000.0} milliseconds")
         else:
-            logger.info(f"A solution with a time complexity of at least O(m^(1.407)) done in: {(time.time() - started) * 1000.0} milliseconds")
+            logger.info(f"A solution with a time complexity of at least O(n^(3.372)) done in: {(time.time() - started) * 1000.0} milliseconds")
         
         answer = utils.string_complex_format(result, count_claws) if count_claws or all_claws else utils.string_simple_format(result)
         output = f"{filename}: {answer}"

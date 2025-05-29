@@ -34,7 +34,7 @@ def main():
     helper.add_argument('-w', '--write', action='store_true', help='write the generated random matrix to a file in the current directory')
     helper.add_argument('-v', '--verbose', action='store_true', help='anable verbose output')
     helper.add_argument('-l', '--log', action='store_true', help='enable file logging')
-    helper.add_argument('--version', action='version', version='%(prog)s 0.0.3')
+    helper.add_argument('--version', action='version', version='%(prog)s 0.0.4')
     
     # Initialize the parameters
     args = helper.parse_args()
@@ -62,13 +62,13 @@ def main():
         logger.info(f"Number of non-zero elements: {sparse_matrix.nnz}")
         logger.info(f"Sparsity: {1 - (sparse_matrix.nnz / (sparse_matrix.shape[0] * sparse_matrix.shape[1]))}")
         
-        # A Solution with O(n + m) Time Complexity
-        logger.info("A solution with a time complexity of O(n + m) started")
+        # A Solution with O(m*maximum_degree) Time Complexity
+        logger.info("A solution with a time complexity of O(m*maximum_degree) started")
         started = time.time()
         
         result = algorithm.find_claw_coordinates(graph, not (count_claws or all_claws))
 
-        logger.info(f"A solution with a time complexity of O(n + m) done in: {(time.time() - started) * 1000.0} milliseconds")
+        logger.info(f"A solution with a time complexity of O(m*maximum_degree) done in: {(time.time() - started) * 1000.0} milliseconds")
 
         answer = utils.string_complex_format(result, count_claws)
         output = f"Algorithm Smart Test {i + 1}: {answer}" 
@@ -77,17 +77,17 @@ def main():
         # A Solution with brute force
         if brute_force:
             if count_claws or all_claws:
-                logger.info("A solution with a time complexity of at least O(n^(3)) started")
+                logger.info("A solution with a time complexity of at least O(n^(4)) started")
             else:    
-                logger.info("A solution with a time complexity of at least O(m^(1.407)) started")
+                logger.info("A solution with a time complexity of at least O(n^(3.372)) started")
             started = time.time()
             
             result = algorithm.find_claw_coordinates_brute_force(sparse_matrix) if count_claws or all_claws else algorithm.is_claw_free_brute_force(sparse_matrix)
 
             if count_claws or all_claws:
-                logger.info(f"A solution with a time complexity of at least O(n^(3)) done in: {(time.time() - started) * 1000.0} milliseconds")
+                logger.info(f"A solution with a time complexity of at least O(n^(4)) done in: {(time.time() - started) * 1000.0} milliseconds")
             else:
-                logger.info(f"A solution with a time complexity of at least O(m^(1.407)) done in: {(time.time() - started) * 1000.0} milliseconds")
+                logger.info(f"A solution with a time complexity of at least O(n^(3.372)) done in: {(time.time() - started) * 1000.0} milliseconds")
             
             answer = utils.string_complex_format(result, count_claws) if count_claws or all_claws else utils.string_simple_format(result)
             output = f"Algorithm Naive Test {i + 1}: {answer}" 
