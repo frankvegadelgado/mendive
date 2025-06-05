@@ -2,12 +2,12 @@ from pathlib import Path
 
 import setuptools
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 
 NAME = "mendive"
 
 INSTALL_REQUIRES = [
-    "aegypti>=0.2.9"
+    "aegypti>=0.3.0"
 ]
 
 setuptools.setup(
