@@ -61,7 +61,7 @@ where the fields W and V specify the endpoints of the edge while the lower-case 
 
 _Example Solution:_
 
-Claw Found `(1, 3, 4, 5)`: In Column `1` and Rows `3` & `4` & `5`
+Claw Found `(1, {3, 4, 5})`: In Column `1` (Center) and Rows `3` & `4` & `5` (Leaves)
 
 # Claw Detection Algorithm Overview
 
@@ -189,10 +189,10 @@ utilizing the `claw` command provided by Mendive's Library to execute the Boolea
 ## The console output will display:
 
 ```
-testMatrix1: Claw Found (1, 3, 4, 5)
+testMatrix1: Claw Found (1, {3, 4, 5})
 ```
 
-which implies that the Boolean adjacency matrix `mendive\benchmarks\testMatrix1` contains a claw combining the nodes `(1, 3, 4, 5)`.
+which implies that the Boolean adjacency matrix `mendive\benchmarks\testMatrix1` contains a claw combining the nodes `(1, {3, 4, 5})` with center `1` and leaves `3, 4, 5`.
 
 ---
 
@@ -209,7 +209,7 @@ claw -i .\benchmarks\testMatrix2 -a
 **Output:**
 
 ```
-testMatrix2: Claws Found (1, 4, 8, 12); (1, 6, 9, 11); (2, 6, 8, 11); (1, 6, 9, 12); (1, 3, 8, 12); (2, 3, 4, 5); (2, 6, 9, 11); (1, 9, 11, 12); (1, 6, 11, 12); (1, 3, 6, 12); (1, 6, 8, 11); (1, 8, 9, 12); (2, 6, 8, 9); (1, 8, 11, 12); (1, 2, 3, 12); (1, 3, 6, 8); (2, 8, 9, 11); (1, 6, 8, 12); (2, 4, 6, 8); (1, 8, 9, 11); (5, 8, 9, 11); (1, 6, 8, 9); (2, 3, 5, 9); (2, 3, 5, 11); (1, 4, 6, 12); (1, 4, 6, 8)
+testMatrix2: Claws Found (1, {6, 11, 12}); (1, {8, 9, 11}); (2, {6, 8, 9}); (1, {4, 6, 8}); (9, {2, 3, 5}); (1, {6, 8, 9}); (1, {3, 6, 12}); (1, {8, 9, 12}); (1, {3, 8, 12}); (2, {6, 8, 11}); (11, {2, 3, 5}); (2, {6, 9, 11}); (5, {8, 9, 11}); (1, {2, 3, 12}); (1, {6, 8, 11}); (1, {8, 11, 12}); (1, {9, 11, 12}); (1, {4, 6, 12}); (1, {4, 8, 12}); (1, {6, 9, 12}); (4, {2, 3, 5}); (1, {6, 9, 11}); (2, {8, 9, 11}); (2, {4, 6, 8}); (1, {6, 8, 12}); (1, {3, 6, 8})
 ```
 
 When multiple claws exist, the output provides a list of their vertices.

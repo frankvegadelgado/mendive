@@ -19,7 +19,7 @@ def find_claw_coordinates(graph, first_claw=True):
 
     Returns:
         A list of sets, where each set represents the coordinates of a claw.
-        Each claw is represented as a set of 4 vertex indices: {center, leaf1, leaf2, leaf3}
+        Each claw is represented as a set of 4 vertex indices: (center, {leaf1, leaf2, leaf3})
         Returns None if no claws are found.
     """
     # Ensure the input is a valid undirected NetworkX graph
@@ -57,12 +57,12 @@ def find_claw_coordinates(graph, first_claw=True):
         # If only the first claw is needed, take one triangle and form a claw
         elif first_claw:
             triangle = triangles.pop()
-            claws = {triangle.union({i})}  # Combine the triangle (3 leaves) with center i
+            claws = {(i, triangle)}  # Combine the triangle (3 leaves) with center i
             break  # Stop after finding the first claw
         
         # Otherwise, collect all claws by combining each triangle with center i
         else:
-            claws.update({triangle.union({i}) for triangle in triangles})
+            claws.update({(i, triangle) for triangle in triangles})
     
     # Return the list of claws, or None if none were found
     return list(claws) if claws else None
@@ -161,7 +161,7 @@ def find_claw_coordinates_brute_force(adjacency_matrix):
    
     Returns:
         A list of sets, where each set represents the coordinates of a claw.
-        Each claw is represented as a set of 4 vertex indices: {center, leaf1, leaf2, leaf3}
+        Each claw is represented as a set of 4 vertex indices: (center, {leaf1, leaf2, leaf3})
         
     Raises:
         TypeError: if the input is not a sparse matrix.
@@ -229,7 +229,7 @@ def _find_independent_triplets_matrix(subgraph, vertices, center):
             dense_sub[j, k] == 0):
             
             # Found an independent triplet - forms a claw with center
-            claw = {center, vertices[i], vertices[j], vertices[k]}
+            claw = (center, frozenset({vertices[i], vertices[j], vertices[k]}))
             claws.append(claw)
     
     return claws
@@ -307,7 +307,7 @@ def _find_triangles_as_claws(complement_subgraph, vertices, center):
             for k in range(j + 1, n):
                 if C[i, k] > 0 and C[j, k] > 0:  # Triangle in complement
                     # This corresponds to an independent set in the original
-                    claw = {center, vertices[i], vertices[j], vertices[k]}
+                    claw = (center, frozenset({vertices[i], vertices[j], vertices[k]}))
                     claws.append(claw)
     
     return claws
@@ -369,7 +369,7 @@ def _vectorized_independent_triplets(adj_matrix, vertices, center):
                     adj_matrix[i, k] == 0 and 
                     adj_matrix[j, k] == 0):
                     
-                    claw = {center, vertices[i], vertices[j], vertices[k]}
+                    claw = (center, frozenset({vertices[i], vertices[j], vertices[k]}))
                     claws.append(claw)
     
     return claws

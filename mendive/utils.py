@@ -178,7 +178,7 @@ def string_complex_format(result, count_result=False):
     if count_result:
         return f"Claws Count {len(result)}"
     else:
-        formatted_string = f"{'; '.join(f'({", ".join(f"{x+1}" for x in sorted(fs))})' for fs in result)}"
+        formatted_string = f"{'; '.join(f'({c+1}, {{{", ".join(f"{x+1}" for x in sorted(fs))}}})' for c, fs in result)}"
         return f"Claw{"s" if len(result) > 1 else ""} Found {formatted_string}"
   else:
      return "Claw Free"
