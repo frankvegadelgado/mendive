@@ -161,7 +161,7 @@ In summary, this algorithm extends the `aegypti` breakthrough to claw detection,
 
 # Compile and Environment
 
-## Install Python >=3.10.
+## Install Python >=3.12.
 
 ## Install Mendive's Library and its Dependencies with:
 
